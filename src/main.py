@@ -57,8 +57,10 @@ def run_multi(num_problems):
 
 def main():
     num_problems = read_int()
-#    run_single(num_problems)
-    run_multi(num_problems)
+    if "multi" in sys.argv:
+        run_multi(num_problems)
+    else:
+        run_single(num_problems)
         
     
 if __name__ == '__main__':
