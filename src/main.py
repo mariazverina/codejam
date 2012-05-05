@@ -9,7 +9,7 @@ import sys #@Reimport
 from multiprocessing import Pool
 
 
-#@memoize
+@memoize
 def foo(x): 
     if(x == 1):
         return 1
