@@ -30,3 +30,11 @@ def read_lines(n):
         lines.append(read_line())
     return lines
     
+def memoize(f):
+    cache= {}
+    def memf(*x):
+        if x not in cache:
+            cache[x] = f(*x)
+        return cache[x]
+    return memf
+

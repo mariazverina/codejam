@@ -5,34 +5,32 @@ Created on Mar 18, 2012
 '''
 
 from codejam import * #@UnusedWildImport
-from math import pow
 import sys #@Reimport
 from multiprocessing import Pool
 
 
+#@memoize
+def foo(x): 
+    if(x == 1):
+        return 1
+    if(x % 2 == 1):
+        return 1 + foo(x/2) + foo(x/2)
+    return foo(x/2) + foo(x/2)
+
 def do_case(inputs):
-    (from_num, to_num) = inputs
-    count = 0
-    digit_count = len(str(from_num))
-    rnumber = int(pow(10, digit_count - 1))
-    for x in range(from_num, to_num+1):
-        candidate = x
-        to_add = set()
-        for n in range(digit_count - 1): #@UnusedVariable
-            candidate = candidate // 10 + (candidate % 10) * rnumber
-            if candidate > x and candidate <= to_num:
-                to_add.add(candidate)
-                
-        count += len(to_add)
-            
-    return [count]
+    (a, b) = inputs
+    return [foo(a), b]
      
 
 def read_inputs():
-    ll = read_ints(2)
-    return ll
+    (a, b) = read_ints(2)
+    return (a, b)
 
-
+def print_case(i, result):
+    print "Case #%d: %d %d" % tuple([i] + result)
+    
+    
+#-- end of user serviceable parts
 
 def run_case((i, inputs)):
     return(i, do_case(inputs))
@@ -41,7 +39,7 @@ def run_single(num_problems):
     for i in range(1, num_problems+1):
         inputs = read_inputs()
         (i, result) = run_case((i, inputs))
-        print "Case #%d: %d" % tuple([i] + result)
+        print_case(i, result)
 
 def run_multi(num_problems):
     inputs = []
@@ -53,7 +51,7 @@ def run_multi(num_problems):
     results = p.map(run_case, zip(range(1, num_problems+1), inputs))
     for i in range(1, num_problems+1):
         (i, result) = results.pop(0)
-        print "Case #%d: %d" % tuple([i] + result)
+        print_case(i, result)
 
 def main():
     num_problems = read_int()
