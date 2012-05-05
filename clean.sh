@@ -1,1 +1,1 @@
-rm *.in *.out *.zip
+rm *.log *.in *.out *.zip
