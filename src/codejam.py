@@ -38,3 +38,6 @@ def memoize(f):
         return cache[x]
     return memf
 
+def debug(foo): 
+    print >> sys.stderr, foo
+

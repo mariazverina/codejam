@@ -56,6 +56,7 @@ def run_multi(num_problems):
 def main():
     num_problems = read_int()
     if "multi" in sys.argv:
+        debug('using multiple cores')
         run_multi(num_problems)
     else:
         run_single(num_problems)
